@@ -1,0 +1,17 @@
+{
+  "name": "iDual Remote",
+  "short_name": "iDual",
+  "description": "Télécommande infrarouge pour éclairages iDual",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0c0e14",
+  "theme_color": "#11141d",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
