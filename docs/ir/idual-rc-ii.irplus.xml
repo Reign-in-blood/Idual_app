@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<irplus>
+  <device manufacturer="Jedi Lighting" model="iDual RC II" format="WINLIRC_NEC1" columns="4">
+    <button label="On">0x407F 0x807F</button>
+    <button label="Off">0x407F 0x40BF</button>
+    <button label="Dim Up">0x407F 0x906F</button>
+    <button label="Dim Down">0x407F 0x08F7</button>
+    <button label="Candle Light">0x407F 0x8877</button>
+    <button label="Warm White">0x407F 0x6897</button>
+    <button label="Daylight">0x407F 0x50AF</button>
+    <button label="Cool White">0x407F 0xC03F</button>
+    <button label="Night Light">0x407F 0x48B7</button>
+    <button label="Sleeping">0x407F 0xE817</button>
+    <button label="Working">0x407F 0xD02F</button>
+    <button label="Relaxing">0x407F 0x20DF</button>
+    <button label="Sunrise">0x407F 0xC837</button>
+    <button label="Pastel color">0x407F 0x18E7</button>
+    <button label="Party">0x407F 0x30CF</button>
+    <button label="Sunset">0x407F 0xA05F</button>
+    <button label="Forest">0x407F 0x28D7</button>
+    <button label="Ocean">0x407F 0x9867</button>
+    <button label="Fireplace">0x407F 0xB04F</button>
+    <button label="Romance">0x407F 0x609F</button>
+    <button label="Fixed: Red">0x407F 0x708F</button>
+    <button label="Fixed: Orange">0x407F 0xE01F</button>
+    <button label="Fixed: Green">0x407F 0x10EF</button>
+    <button label="Fixed: Blue">0x407F 0xA857</button>
+    <button label="Vivid Colors">0x407F 0x58A7</button>
+    <button label="Pastel Colors">0x407F 0xF00F</button>
+  </device>
+</irplus>

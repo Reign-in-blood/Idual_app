@@ -1,0 +1,13 @@
+import './style.css';
+import { commands, type CommandId } from './ir/codes';
+import { isIrAvailable, sendCommand } from './ir/transmitter';
+
+const app = document.querySelector<HTMLDivElement>('#app')!;
+const names: Record<string,string> = {on:'ON',off:'OFF',dimUp:'+',dimDown:'−',warmWhite:'Chaud',coolWhite:'Froid',daylight:'Jour',night:'Nuit',red:'Rouge',orange:'Orange',green:'Vert',blue:'Bleu',candle:'Bougie',sleep:'Sommeil',work:'Travail',relax:'Détente',sunrise:'Aube',sunset:'Crépuscule',pastelColor:'Pastel',party:'Fête',forest:'Forêt',ocean:'Océan',fireplace:'Feu',romance:'Romance',vivid:'Vives',pastels:'Pastels'};
+const button = (id:CommandId, cls='')=>`<button class="key ${cls}" data-id="${id}" type="button" aria-label="${commands.find(c=>c.id===id)!.label}">${names[id]??id}</button>`;
+app.innerHTML = `<main class="shell"><header><div><span class="eyebrow">JEDI LIGHTING</span><h1>iDual <span>Remote</span></h1></div><span class="signal" id="signal">IR · Vérification…</span></header><section class="remote" aria-label="Télécommande iDual"><div class="power-row">${button('on','power on')}${button('off','power off')}</div><div class="dimmer"><span>LUMINOSITÉ</span><div>${button('dimDown','round')}${button('dimUp','round')}</div></div><div class="wheel" role="group" aria-label="Couleurs"><div class="wheel-center"><span>COULEURS</span></div></div><div class="palette">${(['red','orange','green','blue'] as CommandId[]).map(id=>button(id,'color '+id)).join('')}</div><div class="divider"></div><h2>Blancs & ambiances</h2><div class="keys">${(['warmWhite','daylight','coolWhite','night','candle','sleep','work','relax','sunrise','sunset','forest','ocean','fireplace','romance','party','pastelColor','vivid','pastels'] as CommandId[]).map(id=>button(id)).join('')}</div></section><p class="status" role="status" id="status">Application prête.</p><footer>iDual RC II · 26 commandes enregistrées · Hors ligne</footer></main>`;
+const signal = document.querySelector<HTMLElement>('#signal')!;
+const status = document.querySelector<HTMLElement>('#status')!;
+void isIrAvailable().then(v=>{signal.textContent=v?'IR · Disponible':'IR · Non disponible';signal.classList.toggle('active',v)});
+let busy = false;
+app.addEventListener('click', async e=>{const target=(e.target as HTMLElement).closest<HTMLButtonElement>('button[data-id]');if(!target||busy)return;const id=target.dataset.id as CommandId;busy=true;target.classList.add('pressed');try{await sendCommand(id);status.textContent=`Commande envoyée : ${names[id]??id}`;}catch(error){status.textContent=error instanceof Error?error.message:String(error)}finally{busy=false;setTimeout(()=>target.classList.remove('pressed'),140)}});
