@@ -81,10 +81,95 @@ h1 span { color: #a0a9c5; font-weight: 400; }
   display: flex; align-items: center; justify-content: center; gap: 7px;
 }
 .center-color { flex: 1 1 0; min-width: 0; font-size: 8px; }
-.status { text-align: center; min-height: 38px; color: #bac4db; font-size: 13px; padding: 14px 3px 0; }
 footer { text-align: center; color: #67728b; font-size: 11px; margin-top: 14px; }
 @media(max-width: 360px) {
   .remote { padding-inline: 16px; }
   .scene-rows { gap: 7px; }
   .remote-top { gap: 6px; }
+}
+
+/* Appearance options; preserves the remote's established gradients and proportions. */
+:root {
+  --page-bg: #0c0e14;
+  --text-main: #eef0f7;
+  --text-muted: #949bb0;
+  --surface: #171b27;
+  --surface-edge: #454b5e;
+  --remote-gradient: linear-gradient(150deg,#282d3c,#171b27 55%,#10131e);
+  --button-gradient: linear-gradient(#30374b,#22283a);
+  --button-border: #4c546b;
+  --ring-inner: #1b2030;
+  --ring-edge: #30384a;
+  --panel-bg: #202637;
+}
+:root[data-theme="light"] {
+  --page-bg: #d8dee8;
+  --text-main: #222f42;
+  --text-muted: #526174;
+  --surface: #e7ebf2;
+  --surface-edge: #adb8c9;
+  --remote-gradient: linear-gradient(150deg,#e9edf4,#cdd6e3 55%,#bbc8d8);
+  --button-gradient: linear-gradient(#f7f9fc,#c7d1df);
+  --button-border: #a0adc1;
+  --ring-inner: #e2e8f0;
+  --ring-edge: #b9c5d4;
+  --panel-bg: #e7ecf4;
+}
+html, body { background: var(--page-bg); color: var(--text-main); }
+h1, .brand { color: var(--text-main); }
+h1 span { color: var(--text-muted); }
+.remote { background: var(--remote-gradient); border-color: var(--surface-edge); }
+.key { background: var(--button-gradient); border-color: var(--button-border); color: var(--text-main); }
+.on { color: #288857; }
+.off { color: #d45b66; }
+:root[data-theme="dark"] .on { color: #75f4b1; }
+:root[data-theme="dark"] .off { color: #ff8f94; }
+.ring-hole { background: var(--ring-inner); box-shadow: inset 0 0 0 3px var(--ring-edge); }
+.app-header { align-items: flex-start; }
+.heading-block { display: flex; flex-direction: column; gap: 8px; }
+.signal { align-self: flex-start; color: var(--text-muted); }
+.settings-trigger {
+  width: 43px; height: 43px;
+  display: grid; place-items: center; cursor: pointer;
+  color: var(--text-main); background: var(--button-gradient);
+  border: 1px solid var(--button-border); border-radius: 50%;
+  box-shadow: 0 4px 0 #0003, inset 0 1px #ffffff20;
+}
+.settings-trigger:active { transform: translateY(2px); box-shadow: inset 0 2px 4px #0003; }
+footer { color: var(--text-muted); }
+#settings-dialog {
+  color: var(--text-main); background: var(--panel-bg);
+  width: min(430px, calc(100vw - 26px)); max-height: min(85dvh, 780px);
+  border: 1px solid var(--surface-edge); border-radius: 22px;
+  padding: 0; box-shadow: 0 22px 90px #0009;
+}
+#settings-dialog::backdrop { background: #0009; }
+.settings-content { padding: 20px; overflow-y: auto; }
+.panel-heading { display: flex; align-items: center; gap: 13px; justify-content: space-between; margin-bottom: 19px; }
+.panel-heading h2 { margin: 0; font-size: 19px; flex: 1; letter-spacing: -.3px; }
+.panel-heading button {
+  font-size: 24px; color: var(--text-main); background: var(--button-gradient);
+  border: 1px solid var(--button-border); border-radius: 50%;
+  width: 37px; height: 37px; cursor: pointer;
+}
+.option-row { display: flex; flex-direction: column; gap: 11px; padding: 12px 0; border-bottom: 1px solid var(--surface-edge); }
+.option-row strong { font-size: 13px; }
+.option-buttons { display: flex; flex-wrap: wrap; gap: 8px; }
+.option-buttons button {
+  padding: 9px 12px; background: var(--button-gradient); border: 1px solid var(--button-border);
+  border-radius: 12px; color: var(--text-main); cursor: pointer; font-weight: 600;
+}
+.option-buttons button[aria-pressed="true"] { border-color: #57a9e3; box-shadow: inset 0 0 0 1px #57a9e3; }
+.haptic-row { flex-direction: row; align-items: center; justify-content: space-between; }
+.haptic-row label { font-size: 13px; font-weight: 700; }
+.haptic-row input { width: 20px; height: 20px; accent-color: #5397c9; }
+.settings-content p { color: var(--text-main); font-size: 14px; line-height: 1.55; }
+.settings-content .note { color: var(--text-muted); font-size: 12px; }
+.settings-content h3 { margin: 20px 0 4px; font-size: 15px; }
+.menu-links { display: grid; margin-top: 15px; border-top: 1px solid var(--surface-edge); }
+.menu-links > *, .menu-link {
+  padding: 15px 0; background: transparent; border: 0;
+  border-bottom: 1px solid var(--surface-edge); color: var(--text-main);
+  text-decoration: none; text-align: left; display: flex; justify-content: space-between;
+  font: 500 14px Inter, system-ui, sans-serif; cursor: pointer;
 }
