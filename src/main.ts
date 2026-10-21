@@ -38,7 +38,53 @@ function draw(): void {
     '<footer>iDual RC II · '+t('offline')+'</footer></main>' +
     '<dialog id="settings-dialog" aria-label="'+t('settings')+'"><div class="settings-content" id="settings-content"></div></dialog>';
   const dialog = document.querySelector<HTMLDialogElement>('#settings-dialog')!;
-  dialog.addEventListener('click',event=>{if(event.target===dialog)dialog.close()});
+  // Le dialogue est une surface interactive autonome : ses événements restent
+  // attachés directement à la fenêtre modale, pas au conteneur principal.
+  dialog.addEventListener('click', event => {
+    const target = event.target;
+    if (target === dialog) { dialog.close(); return; }
+    if (!(target instanceof Element)) return;
+
+    if (target.closest('[data-close]')) {
+      dialog.close();
+      return;
+    }
+    if (target.closest('[data-back]')) {
+      activePanel = 'settings';
+      showPanel();
+      return;
+    }
+    const page = target.closest<HTMLButtonElement>('button[data-page]');
+    if (page) {
+      activePanel = page.dataset.page as Panel;
+      showPanel();
+      return;
+    }
+    const appearance = target.closest<HTMLButtonElement>('button[data-theme]');
+    if (appearance) {
+      theme = appearance.dataset.theme as Theme;
+      localStorage.setItem('idual-theme', theme);
+      document.documentElement.dataset.theme = theme;
+      showPanel();
+      return;
+    }
+    const lang = target.closest<HTMLButtonElement>('button[data-lang]');
+    if (lang) {
+      language = lang.dataset.lang as Language;
+      localStorage.setItem('idual-language', language);
+      activePanel = 'settings';
+      draw();
+      showPanel();
+    }
+  });
+
+  dialog.addEventListener('change', event => {
+    const input = event.target;
+    if (input instanceof HTMLInputElement && input.id === 'haptic') {
+      haptic = input.checked;
+      localStorage.setItem('idual-haptic', String(haptic));
+    }
+  });
 }
 function panelMarkup(): string {
   if(activePanel==='about')return '<div class="panel-heading"><button data-back aria-label="'+t('back')+'">←</button><h2>'+t('about')+'</h2></div><p>'+t('aboutBody')+'</p><a class="menu-link" href="'+github+'" target="_blank" rel="noopener noreferrer">'+t('source')+' ↗</a>';
@@ -71,19 +117,4 @@ app.addEventListener('click', async event=>{
  try{await sendCommand(command.dataset.id as CommandId);}
  catch(error){console.warn('IR transmission failed',error);}
  finally{busy=false;setTimeout(()=>command.classList.remove('pressed'),140);}
-});
-app.addEventListener('click',event=>{
- const target=event.target as HTMLElement;
- const lang=target.closest<HTMLButtonElement>('[data-lang]');
- if(lang){language=lang.dataset.lang as Language;localStorage.setItem('idual-language',language);draw();activePanel='settings';showPanel();return;}
- const appearance=target.closest<HTMLButtonElement>('[data-theme]');
- if(appearance){theme=appearance.dataset.theme as Theme;localStorage.setItem('idual-theme',theme);document.documentElement.dataset.theme=theme;showPanel();return;}
- const page=target.closest<HTMLButtonElement>('[data-page]');
- if(page){activePanel=page.dataset.page as Panel;showPanel();return;}
- if(target.closest('[data-back]')){activePanel='settings';showPanel();return;}
- if(target.closest('[data-close]'))document.querySelector<HTMLDialogElement>('#settings-dialog')?.close();
-});
-app.addEventListener('change',event=>{
- const target=event.target;
- if(target instanceof HTMLInputElement&&target.id==='haptic'){haptic=target.checked;localStorage.setItem('idual-haptic',String(haptic));}
 });
