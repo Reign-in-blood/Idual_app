@@ -28,3 +28,15 @@ Le navigateur permet de prévisualiser l'interface, **mais n'émet pas d'IR**. P
 - [Roadmap](TODO.md) dont ESP32 à plus long terme
 
 Projet indépendant, non affilié à Jedi Lighting / iDual. Aucun logo officiel incorporé.
+
+## Vérification des mises à jour GitHub
+
+Depuis v0.4.0, l'application recherche automatiquement les nouvelles APK GitHub au lancement et lorsqu'elle revient au premier plan, au maximum une fois toutes les 24 h. Le menu permet de désactiver la recherche et de la lancer manuellement. Les préversions GitHub sont incluses. L'utilisateur doit télécharger et approuver l'installation : Android ne permet pas à cette application une mise à jour silencieuse. La télécommande IR reste utilisable hors ligne.
+
+Compilation sur Windows, depuis le dossier `android` :
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File ..\scripts\build-android.ps1
+```
+
+Voir [docs/RELEASES.md](docs/RELEASES.md) et [les Releases](https://github.com/Reign-in-blood/Idual_app/releases).
