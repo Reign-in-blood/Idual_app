@@ -10,10 +10,7 @@ Le terminal doit utiliser le JDK 21 installé localement ; autrement Gradle 8.11
 
 ```powershell
 git pull origin master
-$env:JAVA_HOME = (Get-ChildItem "C:\Program Files\Eclipse Adoptium" -Directory -Filter "jdk-21*" | Select-Object -First 1).FullName
-$env:Path = "$env:JAVA_HOME\bin;$env:Path"
-npm --prefix .. run android:sync
-.\gradlew.bat assembleDebug
+powershell -NoProfile -ExecutionPolicy Bypass -File ..\scripts\build-android.ps1
 gh release create v0.4.0 ".\app\build\outputs\apk\debug\app-debug.apk#iDual-Remote-v0.4.0.apk" --title "iDual Remote v0.4.0" --notes "Recherche automatique des mises à jour GitHub, contrôle manuel et préférences." --prerelease
 ```
 
