@@ -116,3 +116,14 @@ Cette validation pratique concerne le téléphone et les lampes effectivement ut
 - Privilégier des essais sur appareil physique ; une compilation réussie seule ne confirme pas la transmission.
 - Maintenir une distinction entre PWA (interface web) et APK avec pont IR natif.
 - Après une modification sur GitHub, donner systématiquement la commande simple `git pull origin master` conformément à `AGENTS.md`.
+
+## 10. Vérification automatique des mises à jour GitHub — 22 octobre 2026
+
+- Ajout d'un module `src/updates.ts` permettant de consulter l'API publique des GitHub Releases, y compris les préversions, et de sélectionner la plus récente qui contient une APK.
+- Comparaison numérique des versions et filtrage strict des liens de téléchargement vers le dépôt officiel.
+- Vérification activée par défaut au lancement et au retour dans l'application, cache de 24 heures ; contrôle manuel et désactivation dans les paramètres.
+- Affichage d'un bandeau proposant la nouvelle APK ou « Plus tard », traduit en français, anglais et espagnol. La mise à jour **n'est pas installée silencieusement** : téléchargement et confirmation Android restent nécessaires.
+- La version `v0.4.0` est préparée (`versionCode 3`). La publication de l'APK est à effectuer localement après compilation.
+- Ajout de tests de comparaison/versionnement et de GitHub Actions pour vérifier le code TypeScript et le build Vite.
+- Ajout de `scripts/build-android.ps1` pour compiler en Java 21 sans manipuler manuellement les variables de chaque nouveau terminal.
+- Mise à jour des mentions de confidentialité : si la recherche est activée, l'application peut contacter GitHub. Les commandes IR restent locales.
