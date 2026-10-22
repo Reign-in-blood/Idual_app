@@ -173,3 +173,35 @@ footer { color: var(--text-muted); }
   text-decoration: none; text-align: left; display: flex; justify-content: space-between;
   font: 500 14px Inter, system-ui, sans-serif; cursor: pointer;
 }
+
+/* Discreet update notification: the IR remote remains accessible at all times. */
+.update-banner {
+  width: min(100%, 344px);
+  margin: 0 auto 15px;
+  padding: 13px 14px;
+  color: var(--text-main);
+  background: var(--panel-bg);
+  border: 1px solid var(--surface-edge);
+  border-radius: 16px;
+}
+.update-banner-title { font-size: 13px; font-weight: 700; }
+.update-banner-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 11px; }
+.update-link, .update-banner-actions button, .check-update {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 37px; padding: 9px 13px; border-radius: 10px;
+  font: 600 12px Inter, system-ui, sans-serif;
+  cursor: pointer; text-align: center; text-decoration: none;
+}
+.update-link { background: #32648f; color: #fff; border: 1px solid #537fab; }
+.update-banner-actions button, .check-update {
+  color: var(--text-main);
+  background: var(--button-gradient);
+  border: 1px solid var(--button-border);
+}
+.check-update:disabled { opacity: .55; cursor: progress; }
+.update-options { margin-top: 5px; }
+.update-toggle { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.update-toggle label { font-size: 13px; }
+.update-toggle input { width: 20px; height: 20px; accent-color: #5397c9; }
+.update-options .note { margin: 3px 0; }
+#update-panel-action { margin-top: 6px; }
