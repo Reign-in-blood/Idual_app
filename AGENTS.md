@@ -21,6 +21,8 @@ Application Android native/hybride hors ligne pour piloter des ampoules iDual RC
 7. Après chaque évolution, tester `npm run build`; tester IR sur un appareil physique et noter résultats.
 8. Photos utilisateur: droits d'usage personnels; ne pas publier publiquement sans validation explicite.
 9. Après chaque modification publiée sur GitHub, toujours fournir à l'utilisateur une commande Git simple, directement copiable-collable, pour récupérer les changements dans son clone local. Par défaut : `git pull origin master`. Ne pas imposer d'étapes inutiles ni de commandes destructrices ; si une action supplémentaire est indispensable, l'expliquer et donner les commandes exactes.
+10. Pour chaque nouvelle APK, augmenter `versionCode` et harmoniser `versionName`, `package.json` et `package-lock.json`. Les GitHub Releases peuvent être des préversions ; les mises à jour sont détectées dans `src/updates.ts`.
+11. Les recherches de mises à jour peuvent utiliser Internet, mais doivent rester désactivables ; n'envoyer aucune commande IR ni préférence à GitHub. Jamais d'installation APK silencieuse. Tester le lien de téléchargement et la signature sur téléphone.
 
 ## Attention protocole
 NEC/NEC1 avec préfixe `407F`, trame 32 bits; fréquence d'environ 38 kHz seulement présumée. Vérifier l'ordre des bits Android lors du premier essai. `ConsumerIrManager.transmit` attend alternance on/off en microsecondes, pas directement les mots irplus.
