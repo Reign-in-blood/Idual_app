@@ -24,9 +24,12 @@
 
 ## Distribution GitHub et mises à jour
 - [x] Publier les premières APK de test via GitHub Releases (v0.1.0 et v0.2.0).
-- [x] Fixer une numérotation Android (versionCode 2, versionName 0.3.0).
-- [ ] Publier v0.3.0 après compilation locale et test du menu.
+- [x] Fixer une numérotation Android (versionCode 3, versionName 0.4.0, avec versions npm alignées).
+- [x] Publier v0.3.0 après compilation locale.
+- [ ] Publier v0.4.0 avec vérification des mises à jour après compilation locale.
 - [ ] Utiliser une clé de signature de release stable pour la distribution publique (ne jamais la committer).
+- [x] Ajouter des tests du comparateur et du filtrage des Releases GitHub, exécutés par GitHub Actions.
+- [x] Préparer un script PowerShell de compilation Android fixant automatiquement Java 21.
 - [ ] Tester manuellement l'alerte de mise à jour lors de la publication de v0.5.0 et l'installation par-dessus v0.4.0.
 - [x] Ajouter un contrôle de nouvelle version via l'API GitHub Releases, y compris les pre-releases pendant les tests.
 - [x] Comparer la version intégrée à l'APK à la version publiée ; afficher une invitation discrète, pas d'installation silencieuse.
